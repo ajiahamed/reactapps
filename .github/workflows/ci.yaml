@@ -14,5 +14,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Run bash script
-      run: bash /home/nix/app_runner.sh
+      run: 
+      command: "bash /home/nix/app_runner.sh"
 
