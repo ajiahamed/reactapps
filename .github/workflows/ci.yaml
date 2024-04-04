@@ -15,5 +15,5 @@ jobs:
 
     - name: Run bash script
       run: 
-      command: "bash /home/nix/app_runner.sh"
+        command: "bash /home/nix/app_runner.sh"
 

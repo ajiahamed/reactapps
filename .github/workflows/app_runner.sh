@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # Navigate to the directory of your React app
-cd ~/reactapps
+cd /home/nix/reactapps
 
 # Pull latest changes from Git repository
 git pull origin main
 
 # Install dependencies
-npm install
+sudo npm install
 
 # Build the React app
 npm run build
@@ -16,5 +16,5 @@ npm run build
 # sudo rm -rf /var/www/test_nixntronics/public_html/*
 
 # Copy the built React app to the document root
-sudo cp -r ~/reactapps/build/* /var/www/test_nixntronics/public_html/
+sudo cp -r /home/nix/reactapps/build/* /var/www/test_nixntronics/public_html/
 
