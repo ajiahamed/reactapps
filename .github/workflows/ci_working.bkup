@@ -12,10 +12,6 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-      with: 
-        repository: 'https://gt.mgsigma.net/msigma/assessment-admin-portal.git'
-        token: ${{ secrets.GITEA_TOKEN }}
-        ref: dev 
 
     - name: Install Node.js and npm
       uses: actions/setup-node@v2
