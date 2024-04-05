@@ -13,7 +13,22 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Run bash script
-      run: 
-        command: "bash /home/nix/app_runner.sh"
+    - name: Install Node.js and npm
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'  # Set the desired Node.js version
 
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the react app
+      run: |
+        npm run build
+
+    - name: Remove existing files in document root
+      run: |
+        sudo rm -rf /var/www/test_nixntronics/*
+
+    - name: Copy new build files to document root
+      run: |
+        sudo cp -r build/* /var/www/test_nixntronics/

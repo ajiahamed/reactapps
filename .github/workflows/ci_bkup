@@ -1,0 +1,19 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Run bash script
+      run: 
+        command: "bash /home/nix/app_runner.sh"
+
