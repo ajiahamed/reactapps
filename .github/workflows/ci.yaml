@@ -13,7 +13,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
       with: 
-        repository: 'https://gt.mgsigma.net/msigma/assessment-admin-portal.git'
+        repository: ${{ secrets.GITEA_REPO_URL }}
         token: ${{ secrets.GITEA_TOKEN }}
         ref: dev 
 
