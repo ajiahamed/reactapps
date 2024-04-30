@@ -23,7 +23,7 @@ pipeline {
 
         stage('Build Project') {
             steps {
-                sh 'npm run build-prode'
+                sh 'npm run build'
             }
         }
 
@@ -37,13 +37,13 @@ pipeline {
     post {
        success {
            script {
-            sendTelegramMessage('Pipeline completed successfully!')
+            sendTelegramMessage('Pipeline completed successfully! :)')
         }
     }
         
         failure {
             script {
-            sendTelegramMessage('Pipeline failed!')
+            sendTelegramMessage('Pipeline failed! :(')
         }
      } 
   }
