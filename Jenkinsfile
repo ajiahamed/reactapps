@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'dev',
+                    git branch: 'main',
                         url: "${GIT_URL}"
                 }
             }
