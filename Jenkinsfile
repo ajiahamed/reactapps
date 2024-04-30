@@ -50,11 +50,8 @@ pipeline {
 }
 
 def sendTelegramMessage(message) {
-    def botTokenCredential = credentials('telegram_token').getSecret().trim()
-    def chatIdCredential = credentials('telegram_chatid').getSecret().trim()
-    echo "Bot Token: ${botTokenCredential}"
-    echo "Chat ID: ${chatIdCredential}"
-    
-    sh "curl -X POST -v 'https://api.telegram.org/bot${botTokenCredential}/sendMessage' -d 'chat_id=${chatIdCredential}&text=${message}'"
-}
+    def botToken = '6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ'
+    def chatId = '235671675'
 
+    sh "curl -X POST -v 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
+}
