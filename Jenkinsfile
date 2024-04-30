@@ -62,8 +62,8 @@ pipeline {
     post {
         success {
             script {
-                echo "BOT_TOKEN: ${env.BOT_TOKEN}"
-                echo "CHAT_ID: ${env.CHAT_ID}"
+                def botTokenCredential = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
+                echo "BOT_TOKEN Credential: ${botTokenCredential}"
 
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
