@@ -5,7 +5,7 @@ pipeline {
         BOT_TOKEN = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
         CHAT_ID = '235671675'
         GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
-        GIT_CREDENTIAL_ID = 'mgit_token'
+        GIT_CREDENTIAL_ID = 'github_tkn'
     }
 
     stages {
@@ -21,14 +21,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install --legacy-peer-deps'
-                sh 'npm install caniuse-lite@latest update-browserslist-db@latest --legacy-peer-deps'
+                sh 'npm install 
             }
         }
 
         stage('Build Project') {
             steps {
-                sh 'npm run build-dev'
+                sh 'npm run build'
             }
         }
 
@@ -91,4 +90,3 @@ def sendTelegramMessage(botToken, chatId, message) {
         sh "curl -X POST '${sendMessageUrl}' -d '${sendMessageParams}'"
     }    
 }
-
