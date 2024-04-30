@@ -4,7 +4,7 @@ pipeline {
     environment {
         BOT_TOKEN = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
         CHAT_ID = '235671675'
-        GIT_URL = 'https://gt.mgsigma.net/msigma/assessment-admin-portal.git'
+        GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
         GIT_CREDENTIAL_ID = 'mgit_token'
     }
 
