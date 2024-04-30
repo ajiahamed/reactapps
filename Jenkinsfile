@@ -50,7 +50,9 @@ pipeline {
 }
 
 def sendTelegramMessage(message) {
+    def botTokenCredential = credentials('your_bot_token_credential_id')
+    def chatIdCredential = credentials('your_chat_id_credential_id')
     
-    sh "curl -X POST 'https://api.telegram.org/bot${telegram_token}/sendMessage' -d 'chat_id=${telegram_chatid}&text=${message}'"
+    sh "curl -X POST 'https://api.telegram.org/bot${botTokenCredential}/sendMessage' -d 'chat_id=${chatIdCredential}&text=${message}'"
 }
 
