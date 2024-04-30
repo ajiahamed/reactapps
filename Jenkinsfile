@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'dev',
+                    git branch: 'main',
                         credentialsId: "${GIT_CREDENTIAL_ID}",
                         url: "${GIT_URL}"
                 }
