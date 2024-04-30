@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main',
+                    git branch: 'dev',
                         credentialsId: "${GIT_CREDENTIAL_ID}",
                         url: "${GIT_URL}"
                 }
@@ -21,7 +21,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install' 
+                sh 'npm install'    
             }
         }
 
@@ -62,6 +62,9 @@ pipeline {
     post {
         success {
             script {
+                echo "BOT_TOKEN: ${env.BOT_TOKEN}"
+                echo "CHAT_ID: ${env.CHAT_ID}"
+
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
                 def message = 'Pipeline completed successfully!'
@@ -72,6 +75,9 @@ pipeline {
 
         failure {
             script {
+                echo "BOT_TOKEN: ${env.BOT_TOKEN}"
+                echo "CHAT_ID: ${env.CHAT_ID}"
+
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
                 def message = 'Pipeline failed!'
@@ -86,10 +92,7 @@ def sendTelegramMessage(botToken, chatId, message) {
     node {
         def sendMessageUrl = "https://api.telegram.org/bot${botToken}/sendMessage"
         def sendMessageParams = "chat_id=${chatId}&text=${message}"
-
-        echo "sendMessageUrl: ${sendMessageUrl}" // Debugging
-        echo "sendMessageParams: ${sendMessageParams}" // Debugging
-        
-        sh "curl -X POST -v '${sendMessageUrl}' -d '${sendMessageParams}'"
+    
+        sh "curl -X POST '${sendMessageUrl}' -d '${sendMessageParams}'"
     }    
 }
