@@ -55,18 +55,25 @@ pipeline {
     }
 
     post {
-        always {
+        success {
             script {
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
-                def message
+                def message = 'Pipeline completed successfully!'
                 
-                if (currentBuild.result == 'SUCCESS') {
-                    message = 'Pipeline completed successfully!'
-                } else {
-                    message = 'Pipeline failed!'
+                // Send message only if the pipeline was not successful before this stage
+                if (currentBuild.result != 'SUCCESS') {
+                    sendTelegramMessage(botToken, chatId, message)
                 }
-                
+            }
+        }
+
+        failure {
+            script {
+                def botToken = env.BOT_TOKEN
+                def chatId = env.CHAT_ID
+                def message = 'Pipeline failed!'
+
                 sendTelegramMessage(botToken, chatId, message)
             }
         }
