@@ -53,6 +53,6 @@ def sendTelegramMessage(message) {
     def botTokenCredential = credentials('telegram_token').toString().trim()
     def chatIdCredential = credentials('telegram_chatid').toString().trim()
     
-    sh "curl -X POST 'https://api.telegram.org/bot${botTokenCredential}/sendMessage' -d 'chat_id=${chatIdCredential}&text=${message}'"
+    sh "curl -X POST -v 'https://api.telegram.org/bot${botTokenCredential}/sendMessage' -d 'chat_id=${chatIdCredential}&text=${message}'"
 }
 
