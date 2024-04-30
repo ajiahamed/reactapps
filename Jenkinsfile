@@ -86,6 +86,6 @@ def sendTelegramMessage(botToken, chatId, message) {
         def sendMessageUrl = "https://api.telegram.org/bot${botToken}/sendMessage"
         def sendMessageParams = "chat_id=${chatId}&text=${message}"
     
-        sh "curl -X POST '${sendMessageUrl}' -d '${sendMessageParams}'"
+        sh "curl -X POST -v '${sendMessageUrl}' -d '${sendMessageParams}'"
     }    
 }
