@@ -50,8 +50,8 @@ pipeline {
 }
 
 def sendTelegramMessage(message) {
-    def botTokenCredential = credentials('telegram_token').getPlainText().trim()
-    def chatIdCredential = credentials('telegram_chatid').getPlainText().trim()
+    def botTokenCredential = credentials('telegram_token').getSecret().trim()
+    def chatIdCredential = credentials('telegram_chatid').getSecret().trim()
     echo "Bot Token: ${botTokenCredential}"
     echo "Chat ID: ${chatIdCredential}"
     
