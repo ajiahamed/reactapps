@@ -5,14 +5,13 @@ pipeline {
         BOT_TOKEN = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
         CHAT_ID = '235671675'
         GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
-        GIT_CREDENTIAL_ID = 'github_tkn'
     }
 
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'dev',
+                    git branch: 'main',
                         credentialsId: "${GIT_CREDENTIAL_ID}",
                         url: "${GIT_URL}"
                 }
@@ -40,9 +39,6 @@ pipeline {
         stage('Send Message to Telegram') {
             steps {
                 script {
-                    echo "BOT_TOKEN: ${env.BOT_TOKEN}"
-                    echo "CHAT_ID: ${env.CHAT_ID}"
-                    
                     def botTokenCredential = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
                     echo "BOT_TOKEN Credential: ${botTokenCredential}"
                     
@@ -65,9 +61,6 @@ pipeline {
     post {
         success {
             script {
-                echo "BOT_TOKEN: ${env.BOT_TOKEN}"
-                echo "CHAT_ID: ${env.CHAT_ID}"
-                
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
                 def message = 'Pipeline completed successfully!'
@@ -78,9 +71,6 @@ pipeline {
 
         failure {
             script {
-                echo "BOT_TOKEN: ${env.BOT_TOKEN}"
-                echo "CHAT_ID: ${env.CHAT_ID}"
-
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
                 def message = 'Pipeline failed!'
