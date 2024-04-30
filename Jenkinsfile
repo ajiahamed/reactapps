@@ -55,31 +55,25 @@ pipeline {
     }
 
     post {
-        success {
-            script {
-                def botToken = env.BOT_TOKEN
-                def chatId = env.CHAT_ID
-                def message = 'Pipeline completed successfully!:)'
-                
-                // Send message only if the pipeline was not successful before this stage
-                if (currentBuild.result != 'SUCCESS') {
-                    sendTelegramMessage(botToken, chatId, message)
-                }
-            }
+       success {
+           script {
+            sendTelegramMessage('Pipeline completed successfully!')
         }
+    }
 
         failure {
             script {
-                def botToken = env.BOT_TOKEN
-                def chatId = env.CHAT_ID
-                def message = 'Pipeline failed!:('
-
-                sendTelegramMessage(botToken, chatId, message)
-            }
+            sendTelegramMessage('Pipeline failed!')
+        }
+    }
         }
     }
 }
 
-def sendTelegramMessage(botToken, chatId, message) {
-    sh "curl -X POST -v 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
+def sendTelegramMessage(message) {
+    def botToken = '6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ'
+    def chatId = '235671675'
+
+    sh "curl -X POST 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
 }
+
