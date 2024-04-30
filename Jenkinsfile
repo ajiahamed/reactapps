@@ -44,8 +44,7 @@ pipeline {
 
                     if (currentBuild.result == 'SUCCESS') {
                         message = 'Pipeline completed successfully!'
-                    } 
-                    else if (currentBuild.result == 'FAILURE') {
+                    } else {
                         message = 'Pipeline failed!'
                     }
 
@@ -82,5 +81,5 @@ pipeline {
 }
 
 def sendTelegramMessage(botToken, chatId, message) {
-    sh "curl -X POST 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
+    sh "curl -X POST -v 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
 }
