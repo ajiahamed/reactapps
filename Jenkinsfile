@@ -86,7 +86,10 @@ def sendTelegramMessage(botToken, chatId, message) {
     node {
         def sendMessageUrl = "https://api.telegram.org/bot${botToken}/sendMessage"
         def sendMessageParams = "chat_id=${chatId}&text=${message}"
-    
+
+        echo "sendMessageUrl: ${sendMessageUrl}" // Debugging
+        echo "sendMessageParams: ${sendMessageParams}" // Debugging
+        
         sh "curl -X POST -v '${sendMessageUrl}' -d '${sendMessageParams}'"
     }    
 }
