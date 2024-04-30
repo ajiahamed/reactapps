@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        BOT_TOKEN = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
+        BOT_TOKEN = '6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ'
         CHAT_ID = '235671675'
         GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
     }
@@ -11,8 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'main',
-                        credentialsId: "${GIT_CREDENTIAL_ID}",
+                    git branch: 'dev',
                         url: "${GIT_URL}"
                 }
             }
@@ -39,9 +38,6 @@ pipeline {
         stage('Send Message to Telegram') {
             steps {
                 script {
-                    def botTokenCredential = credentials('6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ')
-                    echo "BOT_TOKEN Credential: ${botTokenCredential}"
-                    
                     def botToken = env.BOT_TOKEN
                     def chatId = env.CHAT_ID
                     def message
@@ -59,22 +55,18 @@ pipeline {
     }
 
     post {
-        success {
+        always {
             script {
                 def botToken = env.BOT_TOKEN
                 def chatId = env.CHAT_ID
-                def message = 'Pipeline completed successfully!'
-
-                sendTelegramMessage(botToken, chatId, message)
-            }
-        }
-
-        failure {
-            script {
-                def botToken = env.BOT_TOKEN
-                def chatId = env.CHAT_ID
-                def message = 'Pipeline failed!'
-
+                def message
+                
+                if (currentBuild.result == 'SUCCESS') {
+                    message = 'Pipeline completed successfully!'
+                } else {
+                    message = 'Pipeline failed!'
+                }
+                
                 sendTelegramMessage(botToken, chatId, message)
             }
         }
@@ -82,10 +74,5 @@ pipeline {
 }
 
 def sendTelegramMessage(botToken, chatId, message) {
-    node {
-        def sendMessageUrl = "https://api.telegram.org/bot${botToken}/sendMessage"
-        def sendMessageParams = "chat_id=${chatId}&text=${message}"
-    
-        sh "curl -X POST -v '${sendMessageUrl}' -d '${sendMessageParams}'"
-    }    
+    sh "curl -X POST 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
 }
