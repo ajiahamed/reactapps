@@ -1,27 +1,13 @@
+@Library('your-shared-library') _
+
 pipeline {
-    agent none // This will default to the Jenkins server if no specific agent is chosen
+    agent { label org.example.AgentSelector.selectAgent() }
     
     environment {
         GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
     }
 
     stages {
-
-        stage('Check Agent Availability') {
-            steps {
-                script {
-                    def worker01Label = 'worker01'
-                    def worker01Online = isNodeOnline(worker01Label)
-                    if (worker01Online) {
-                        agent {
-                            label worker01Label
-                        }
-                    } else {
-                        agent any
-                    }
-                }
-            }
-        }
 
         stage('Checkout') {
             steps {
@@ -64,12 +50,6 @@ pipeline {
         }
      } 
   }
-}
-
-def isNodeOnline(nodeLabel) {
-    return Jenkins.instance.nodes.find { node ->
-        node.getAssignedLabels().contains(nodeLabel) && node.toComputer().online
-    }
 }
 
 def sendTelegramMessage(message) {
