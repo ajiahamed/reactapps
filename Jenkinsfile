@@ -10,8 +10,9 @@ pipeline {
         stage('Check Agent Availability') {
             steps {
                 script {
-                    def worker01Online = 'worker01'
-                    if (isNodeOnline(worker01Label)) {
+                    def worker01Label = 'worker01'
+                    def worker01Online = isNodeOnline(worker01Label)
+                    if (worker01Online) {
                         agent {
                             label worker01Label
                         }
@@ -49,10 +50,31 @@ pipeline {
             }
         }
     }
+
+    post {
+       success {
+           script {
+            sendTelegramMessage('[✅] Pipeline completed successfully! 😊')
+        }
+    }
+        
+        failure {
+            script {
+            sendTelegramMessage('[❌] Pipeline failed! 😱')
+        }
+     } 
+  }
 }
 
 def isNodeOnline(nodeLabel) {
-    return !Jenkins.instance.nodes.find { node ->
+    return Jenkins.instance.nodes.find { node ->
         node.getAssignedLabels().contains(nodeLabel) && node.toComputer().online
     }
+}
+
+def sendTelegramMessage(message) {
+    def botToken = '6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ'
+    def chatId = '235671675'
+
+    sh "curl -X POST -v 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
 }
