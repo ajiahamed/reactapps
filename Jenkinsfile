@@ -10,10 +10,10 @@ pipeline {
         stage('Check Agent Availability') {
             steps {
                 script {
-                    def workerOnline = nodeExists('worker01')
-                    if (workerOnline) {
+                    def worker01Online = 'worker01'
+                    if (isNodeOnline(worker01Label)) {
                         agent {
-                            label 'worker01'
+                            label worker01Label
                         }
                     } else {
                         agent any
@@ -65,9 +65,9 @@ pipeline {
   }
 }
 
-def nodeExists(nodeName) {
-    return hudson.model.Hudson.instance.nodes.any { node ->
-        node.name == nodeName && node.toComputer().online
+def isNodeOnline(nodeLabel) {
+    return !Jenkins.instance.nodes.find { node ->
+        node.getAssignedLabels().contains(nodeLabel) && node.toComputer().online
     }
 }
 
