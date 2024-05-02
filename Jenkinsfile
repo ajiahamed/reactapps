@@ -1,4 +1,4 @@
-@Library('AgentSelector') _
+@Library('AgentSelector.groovy') _
 
 pipeline {
     agent { label org.example.AgentSelector.selectAgent() }
