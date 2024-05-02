@@ -10,20 +10,13 @@ pipeline {
         stage('Check Agent Availability') {
             steps {
                 script {
-                    // Check if "worker01" agent is online
-                    def workerOnline = false
-                    def workerNode = Jenkins.instance.getNode("worker01")
-                    if (workerNode != null && workerNode.toComputer().online) {
-                        workerOnline = true
-                    }
-
-                    // Choose agent based on availability
+                    def workerOnline = nodeExists('worker01')
                     if (workerOnline) {
                         agent {
                             label 'worker01'
                         }
                     } else {
-                        agent any // Run on any available agent if "worker01" is not online
+                        agent any
                     }
                 }
             }
@@ -70,6 +63,12 @@ pipeline {
         }
      } 
   }
+}
+
+def nodeExists(nodeName) {
+    return hudson.model.Hudson.instance.nodes.any { node ->
+        node.name == nodeName && node.toComputer().online
+    }
 }
 
 def sendTelegramMessage(message) {
