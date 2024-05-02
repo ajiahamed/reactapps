@@ -1,4 +1,4 @@
-@Library('AgentSelector') _
+@Library('my_lib') _
 
 pipeline {
     agent { label org.example.AgentSelector.selectAgent() }
