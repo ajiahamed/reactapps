@@ -27,14 +27,6 @@ pipeline {
             }
         }
         
-        stage('Copy Files') {
-            steps {
-                script {
-                    sh 'mkdir -p /opt/jenkins/admin'  // Create directory if it doesn't exist
-                }
-            }
-        }
-        
         stage('Deploy to Apache') {
             steps {
                 sh 'cp -r build/* /opt/jenkins/admin'
