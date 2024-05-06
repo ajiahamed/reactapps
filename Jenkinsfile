@@ -36,17 +36,18 @@ pipeline {
         post {
         success {
             script {
-                sendTelegramMessage('[✅] Admin-Portal_Pipeline completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😊')
+                sendTelegramMessage('[✅] Pipeline04 completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😊')
             }
         }
         
         failure {
             script {
-                sendTelegramMessage('[❌] Admin-Portal_Pipeline failed at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😱')
+                sendTelegramMessage('[❌] Pipeline04 failed at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😱')
             }
         }
     }
 }
+
 triggers {
         pollSCM('H/2 * * * *') // Poll SCM every minute
     }
