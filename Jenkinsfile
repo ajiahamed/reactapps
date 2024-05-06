@@ -29,7 +29,7 @@ pipeline {
         
         stage('Deploy to Apache') {
             steps {
-                sh 'cp -r build/* /home/nix/http'
+                sh 'cp -r build/* /opt/jenkins'
             }
         }
     }
