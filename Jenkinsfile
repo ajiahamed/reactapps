@@ -46,7 +46,6 @@ pipeline {
             }
         }
     }
-}
 
 triggers {
         pollSCM('H/2 * * * *') // Poll SCM every minute
