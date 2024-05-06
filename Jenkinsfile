@@ -29,7 +29,7 @@ pipeline {
         
         stage('Deploy to Apache') {
             steps {
-                sh 'cp -r build/* /var/www/admin'
+                sh 'cp -r build/* /var/www/prod_nixntronics'
             }
         }
     }
