@@ -27,7 +27,6 @@ pipeline {
             }
         }
         
-        stages {
         stage('Copy Files') {
             steps {
                 script {
@@ -35,7 +34,7 @@ pipeline {
                 }
             }
         }
-    }
+        
         stage('Deploy to Apache') {
             steps {
                 sh 'cp -r build/* /opt/jenkins/admin'
