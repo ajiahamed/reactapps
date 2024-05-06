@@ -1,8 +1,5 @@
-@Library('my_Lib') _
-
 pipeline {
-    agent { label org.example.AgentSelector.selectAgent() }
-    
+    agent any
     environment {
         GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
     }
@@ -36,25 +33,4 @@ pipeline {
             }
         }
     }
-
-    post {
-       success {
-           script {
-            sendTelegramMessage('[✅] Pipeline completed successfully! 😊')
-        }
-    }
-        
-        failure {
-            script {
-            sendTelegramMessage('[❌] Pipeline failed! 😱')
-        }
-     } 
-  }
-}
-
-def sendTelegramMessage(message) {
-    def botToken = '6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ'
-    def chatId = '235671675'
-
-    sh "curl -X POST -v 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
 }
