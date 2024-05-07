@@ -37,13 +37,13 @@ pipeline {
     post {
        success {
            script {
-            sendTelegramMessage('[✅] Pipeline completed successfully! 😊') //testing.......
+            sendTelegramMessage('[✅] Pipeline completed successfully! 😊') // Telegram success msg
         }
     }
         
         failure {
             script {
-            sendTelegramMessage('[❌] Pipeline failed! 😱') //testing.......
+            sendTelegramMessage('[❌] Pipeline failed! 😱') // Telegram failed msg
         }
      } 
   }
