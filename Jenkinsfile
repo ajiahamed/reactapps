@@ -36,13 +36,13 @@ pipeline {
         post {
         success {
             script {
-                sendTelegramMessage('[✅] Pipeline04 completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😊')
+                sendTelegramMessage('[✅] ReactApp_pipeline completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😊')
             }
         }
         
         failure {
             script {
-                sendTelegramMessage('[❌] Pipeline04 failed at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😱')
+                sendTelegramMessage('[❌] ReactApp_pipeline failed at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😱')
             }
         }
     }
