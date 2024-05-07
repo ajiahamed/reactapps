@@ -53,8 +53,8 @@ triggers {
 }
 
 def sendTelegramMessage(message) {
-    def botToken = '6993570114:AAFFzf0QrMbi9YaY7NsVMCp7nR3JrXs1mJQ'
-    def chatId = '-1002117551270'
+    def botToken = '6538192612:AAFfKCzXnDn1QU3_sKJAMNgtdU5E37hYO44'
+    def chatId = '-235671675'
 
     sh "curl -X POST -v 'https://api.telegram.org/bot${botToken}/sendMessage' -d 'chat_id=${chatId}&text=${message}'"
 }
