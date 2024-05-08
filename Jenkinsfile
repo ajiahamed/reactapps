@@ -74,8 +74,8 @@ pipeline {
         stage('Deploy to Apache') {
             steps {
                 //sh 'cp -r build/* /opt/jenkins'
-                sh 'rm -rf '
-                sh 'scp -r build/* /opt/jenkins'
+                sh 'ssh nix@192.168.122.97 "rm -rf /opt/jenkins/reactapp/*"'
+                sh 'scp -r build/* nix@192.168.122.97:/opt/jenkins/reactapp'
             }
             post {
                 success {
