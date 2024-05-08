@@ -6,10 +6,10 @@ pipeline {
 
     stages {
 
-        stage('Preparation') {
+        stage('StartingPipline') {
             steps {
                 script {
-                    sendTelegramMessage('Pipeline is starting...')
+                    sendTelegramMessage('Pipeline for reactapp is starting...')
                 }
             }
             post {
