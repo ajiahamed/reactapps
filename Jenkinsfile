@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'worker'
+    }
     environment {
         GIT_URL = 'https://github.com/ajiahamed/reactapps.git'
     }
