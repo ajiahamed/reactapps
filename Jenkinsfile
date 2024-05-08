@@ -6,6 +6,26 @@ pipeline {
 
     stages {
 
+        stage('Preparation') {
+            steps {
+                script {
+                    sendTelegramMessage('Pipeline is starting...')
+                }
+            }
+            post {
+                success {
+                    script {
+                        sendTelegramMessage('[✅] Preparation stage completed successfully.')
+                    }
+                }
+                failure {
+                    script {
+                        sendTelegramMessage('[❌] Preparation stage failed.')
+                    }
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 script {
@@ -19,11 +39,35 @@ pipeline {
             steps {
                 sh 'npm install'    
             }
+            post {
+                success {
+                    script {
+                        sendTelegramMessage('[✅] Dependencies stage completed successfully.')
+                    }
+                }
+                failure {
+                    script {
+                        sendTelegramMessage('[❌] Dependencies stage failed.')
+                    }
+                }
+            }
         }
 
         stage('Build Project') {
             steps {
                 sh 'npm run build'
+            }
+            post {
+                success {
+                    script {
+                        sendTelegramMessage('[✅] Build stage completed successfully.')
+                    }
+                }
+                failure {
+                    script {
+                        sendTelegramMessage('[❌] Build stage failed.')
+                    }
+                }
             }
         }
         
@@ -33,6 +77,18 @@ pipeline {
                 sh 'rm -rf '
                 sh 'scp -r build/* /opt/jenkins'
             }
+            post {
+                success {
+                    script {
+                        sendTelegramMessage('[✅] Deploy stage completed successfully.')
+                    }
+                }
+                failure {
+                    script {
+                        sendTelegramMessage('[❌] Deploy stage failed.')
+                    }
+                }
+            } 
         }
     }
         post {
