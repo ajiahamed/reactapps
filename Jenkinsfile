@@ -29,7 +29,9 @@ pipeline {
         
         stage('Deploy to Apache') {
             steps {
-                sh 'cp -r build/* /opt/jenkins'
+                //sh 'cp -r build/* /opt/jenkins'
+                sh 'rm -rf '
+                sh 'scp -r build/* /opt/jenkins'
             }
         }
     }
