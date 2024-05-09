@@ -11,7 +11,7 @@ pipeline {
         stage('StartingPipline') {
             steps {
                 script {
-                    sendTelegramMessage('Pipeline for reactapp is starting...')
+                    sendTelegramMessage('Pipeline for reactapp is starting... ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number')
                 }
             }
             post {
