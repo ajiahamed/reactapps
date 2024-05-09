@@ -11,7 +11,7 @@ pipeline {
         stage('StartingPipline') {
             steps {
                 script {
-                    sendTelegramMessage('Pipeline for reactapp is starting... ' + getCurrentTime())
+                    sendTelegramMessage('[🚨] Pipeline for reactapp is starting... ' + getCurrentTime())
                 }
             }
             post {
