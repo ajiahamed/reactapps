@@ -93,7 +93,7 @@ pipeline {
             } 
         }
     }
-        post {
+    post {
         success {
             script {
                 sendTelegramMessage('[✅] ReactApp_pipeline completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 🏆')
