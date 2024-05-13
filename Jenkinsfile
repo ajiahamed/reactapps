@@ -14,18 +14,6 @@ pipeline {
                     sendTelegramMessage('[🚨] Pipeline for reactapp is starting... ' + getCurrentTime())
                 }
             }
-            post {
-                success {
-                    script {
-                        sendTelegramMessage('[✅] Preparation stage completed successfully.')
-                    }
-                }
-                failure {
-                    script {
-                        sendTelegramMessage('[❌] Preparation stage failed.')
-                    }
-                }
-            }
         }
 
         stage('Checkout') {
@@ -33,6 +21,18 @@ pipeline {
                 script {
                     git branch: 'main',
                         url: "${GIT_URL}"
+                }
+            }
+              post {
+                success {
+                    script {
+                        sendTelegramMessage('[✅] Cloning completed successfully.')
+                    }
+                }
+                failure {
+                    script {
+                        sendTelegramMessage('[❌] Cloning stage failed.')
+                    }
                 }
             }
         }
