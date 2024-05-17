@@ -9,7 +9,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 script {
-                    sendTelegramMessage('🚨 Pipeline is starting...!')
+                    sendTelegramMessage('🚨 Prod Pipeline is starting...!')
                 }
             }
             post {
@@ -94,13 +94,13 @@ pipeline {
         post {
         success {
             script {
-                sendTelegramMessage('[✅] ReactApp_pipeline for Dev completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😊')
+                sendTelegramMessage('[✅] ReactApp_pipeline for Prod completed successfully at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😊')
             }
         }
         
         failure {
             script {
-                sendTelegramMessage('[❌] ReactApp_pipeline for Dev failed at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😱')
+                sendTelegramMessage('[❌] ReactApp_pipeline for Prod failed at ' + getCurrentTime() + '. Branch: ' + getGitBranch() + ', Build: #' + currentBuild.number + ' 😱')
             }
         }
     }
