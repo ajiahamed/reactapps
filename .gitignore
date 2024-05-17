@@ -24,3 +24,7 @@ yarn-error.log*
 
 # Jenkins file
 Jenkinsfile
+
+# Other files to ignore
+.gitattributes
+ours-merge.sh
