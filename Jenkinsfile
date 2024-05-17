@@ -9,7 +9,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 script {
-                    sendTelegramMessage('🚨 Pipeline is starting...!')
+                    sendTelegramMessage('🚨 Dev Pipeline is starting...!')
                 }
             }
             post {
